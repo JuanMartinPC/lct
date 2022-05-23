@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %} Productos {% endblock %}
+
+{% block contenido %}
+
+<div class="grid__container" style="zoom: 51%;">
+    <div class="grid__container-box">
+        <div class="uno">
+            <div class="listado">
+                <div class="agregar">
+                    <a href="{% url 'crear' %}">Agregar nuevo producto</a>
+                </div>
+                
+                <div class="contenedor__stock">
+                    <div class="contenedor__stock-divs">
+                        <div class="stock_item">
+                            <p> Productos registrados: </p>
+                            <h5>{{ cantidad_total }}</h5>
+                        </div>
+                        <hr>
+                        <div class="stock_item">
+                            <p> Productos con stock disponible: </p>
+                            <h5>{{ en_stock }}</h5>
+                        </div>
+                        <hr>
+                        <div class="stock_item">
+                            <p> Productos sin stock disponible: </p>
+                            <h5>{{ sin_stock }}</h5>
+                        </div>
+                    </div>
+                    <div class="contenedor__stock-num">
+                        
+                          
+                    </div>           
+                </div>
+            </div>
+        </div>
+        
+        <div class="dos">
+            <div class="listado">
+            {% for producto in productos %}
+            <div class="listado__flex">
+                <img class="flex__img" src="{{ producto.img.url }}" >
+                <div class="listado__flex-item" >
+                    <div class="flex__item-fields">
+                        <div class="field__name">Nombre</div>
+                        <div class="field__content">{{ producto.nombre}}</div>
+                    </div>
+                    <div class="flex__item-fields">
+                        <div class="field__name">Stock</div>
+                        <div class="field__content">{{ producto.stock}}</div>
+                    </div>
+                    <div class="flex__item-fields">
+                        <div class="field__name">Precio</div>
+                        <div class="field__content">{{ producto.precio}}</div>
+                    </div>
+                    <div class="flex__item-fields">
+                        <div class="field__name">Descripcion</div>
+                        <div class="field__content">{{ producto.descripcion}}</div>
+                    </div>
+                    <div class="flex__item-fields">
+                        <div class="field__name">Empresa</div>
+                        <div class="field__content">{{ producto.empresa}}</div>
+                    </div>
+                </div>
+                <div class="botones">
+                    <div class="botones__item"><a href="{% url 'editar' producto.id %}"><i class="fa-solid fa-pencil"></i>Editar</a></div>
+                    <div class="botones__item"><p>|</p></div>
+                    <div class="botones__item"><a href="{% url 'eliminar' producto.id %}"><i class="fa-solid fa-trash"></i>Eliminar</a></div>                        
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div></div>
+    </div>
+</div>
+
+
+
+{% endblock %}
